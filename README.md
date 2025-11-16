@@ -2,6 +2,9 @@
 
 Ein produktionsreifer Apify Actor zur automatisierten Generierung qualifizierter B2B Leads mit Fokus auf Entscheidungsträger in deutschen Unternehmen.
 
+**Version:** 1.0.3
+**Status:** Demo-Modus aktiv mit Mock-Daten (SAP, Siemens, Telekom)
+
 ## Features
 
 - **Intelligente Unternehmenssuche**: Findet relevante Unternehmen basierend auf Standort und Branche
