@@ -1,0 +1,32 @@
+{
+  "name": "b2b-lead-generator",
+  "version": "1.0.0",
+  "description": "B2B Lead Generator für IT-Recruiter - Findet Entscheidungsträger mit Kontaktdaten",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/main.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "apify",
+    "lead-generation",
+    "b2b",
+    "scraping",
+    "recruiting"
+  ],
+  "author": "IT Recruiter Tools",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apify": "^3.1.10",
+    "cheerio": "^1.0.0-rc.12",
+    "playwright": "^1.40.1",
+    "axios": "^1.6.2",
+    "email-validator": "^2.0.4"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luki5793-ai/Leads-Test.git"
+  }
+}

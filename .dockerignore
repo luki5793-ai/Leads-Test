@@ -1,0 +1,8 @@
+node_modules
+apify_storage
+storage
+.git
+.gitignore
+README.md
+.env
+.env.local

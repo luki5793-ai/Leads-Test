@@ -1,0 +1,65 @@
+{
+  "actorSpecification": 1,
+  "name": "b2b-lead-generator",
+  "title": "B2B Lead Generator für IT-Recruiter",
+  "description": "Generiert qualifizierte B2B Leads mit Fokus auf Entscheidungsträger in deutschen Unternehmen. Findet CEOs, Geschäftsführer, HR-Leiter und weitere Entscheidungsträger mit Kontaktdaten.",
+  "version": "1.0.0",
+  "meta": {
+    "templateId": "node-playwright"
+  },
+  "input": "./.actor/INPUT_SCHEMA.json",
+  "dockerfile": "./Dockerfile",
+  "readme": "./README.md",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "title": "B2B Leads",
+      "views": {
+        "overview": {
+          "title": "Lead Übersicht",
+          "transformation": {
+            "fields": [
+              "firstName",
+              "lastName",
+              "company",
+              "email",
+              "phone",
+              "jobTitle",
+              "location",
+              "confidence"
+            ]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "firstName": {
+                "label": "Vorname"
+              },
+              "lastName": {
+                "label": "Nachname"
+              },
+              "company": {
+                "label": "Unternehmen"
+              },
+              "email": {
+                "label": "E-Mail"
+              },
+              "phone": {
+                "label": "Telefon"
+              },
+              "jobTitle": {
+                "label": "Position"
+              },
+              "location": {
+                "label": "Standort"
+              },
+              "confidence": {
+                "label": "Qualität"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

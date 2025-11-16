@@ -1,0 +1,74 @@
+{
+  "title": "B2B Lead Generator Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "jobTitles": {
+      "title": "Job-Titel der Entscheidungsträger",
+      "type": "array",
+      "description": "Liste von Job-Titeln nach denen gesucht werden soll (z.B. Geschäftsführer, CEO, Head of HR, Personalleiter)",
+      "editor": "stringList",
+      "default": ["Geschäftsführer", "CEO", "Personalleiter", "Head of HR"],
+      "prefill": ["Geschäftsführer", "CEO", "Personalleiter", "Head of HR"]
+    },
+    "locations": {
+      "title": "Standorte",
+      "type": "array",
+      "description": "Städte/Regionen für die Suche",
+      "editor": "stringList",
+      "default": ["München", "Berlin", "Hamburg", "Köln"],
+      "prefill": ["München", "Berlin", "Hamburg", "Köln"]
+    },
+    "postalCodes": {
+      "title": "Postleitzahlen (optional)",
+      "type": "array",
+      "description": "Spezifische PLZ-Bereiche (z.B. '80', '10', '20' für Präfixe)",
+      "editor": "stringList"
+    },
+    "maxResults": {
+      "title": "Maximale Anzahl Leads",
+      "type": "integer",
+      "description": "Maximale Anzahl an Leads die generiert werden sollen",
+      "default": 50,
+      "minimum": 1,
+      "maximum": 500
+    },
+    "industries": {
+      "title": "Branchen (optional)",
+      "type": "array",
+      "description": "Spezifische Branchen (z.B. IT, Consulting, E-Commerce)",
+      "editor": "stringList"
+    },
+    "companySize": {
+      "title": "Unternehmensgröße (optional)",
+      "type": "string",
+      "description": "Gewünschte Unternehmensgröße",
+      "enum": ["any", "1-10", "11-50", "51-200", "201-500", "500+"],
+      "default": "any"
+    },
+    "searchEngine": {
+      "title": "Suchmaschine",
+      "type": "string",
+      "description": "Welche Suchmaschine soll verwendet werden",
+      "enum": ["google", "bing"],
+      "default": "google"
+    },
+    "enrichWithEmail": {
+      "title": "E-Mail Anreicherung",
+      "type": "boolean",
+      "description": "Versuche E-Mail-Adressen zu finden",
+      "default": true
+    },
+    "proxyConfiguration": {
+      "title": "Proxy Konfiguration",
+      "type": "object",
+      "description": "Apify Proxy Konfiguration",
+      "prefill": {
+        "useApifyProxy": true,
+        "apifyProxyGroups": ["RESIDENTIAL"]
+      },
+      "editor": "proxy"
+    }
+  },
+  "required": ["jobTitles", "locations"]
+}

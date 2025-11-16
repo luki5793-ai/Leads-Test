@@ -1,0 +1,19 @@
+{
+  "jobTitles": [
+    "Geschäftsführer",
+    "CEO",
+    "Personalleiter"
+  ],
+  "locations": [
+    "München",
+    "Berlin"
+  ],
+  "maxResults": 10,
+  "industries": ["IT", "Consulting"],
+  "companySize": "any",
+  "searchEngine": "google",
+  "enrichWithEmail": true,
+  "proxyConfiguration": {
+    "useApifyProxy": false
+  }
+}
