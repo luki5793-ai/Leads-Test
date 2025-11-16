@@ -1,6 +1,6 @@
 {
   "name": "b2b-lead-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "B2B Lead Generator für IT-Recruiter - Findet Entscheidungsträger mit Kontaktdaten",
   "main": "src/main.js",
   "type": "module",

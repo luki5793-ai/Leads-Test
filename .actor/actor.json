@@ -3,7 +3,7 @@
   "name": "b2b-lead-generator",
   "title": "B2B Lead Generator für IT-Recruiter",
   "description": "Generiert qualifizierte B2B Leads mit Fokus auf Entscheidungsträger in deutschen Unternehmen. Findet CEOs, Geschäftsführer, HR-Leiter und weitere Entscheidungsträger mit Kontaktdaten.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "meta": {
     "templateId": "node-playwright"
   },
