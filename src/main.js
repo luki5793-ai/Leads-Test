@@ -1,5 +1,4 @@
-import { Actor } from 'apify';
-import { Dataset } from 'apify';
+import { Actor, Dataset } from 'apify';
 import { searchCompanies } from './scrapers/company-search.js';
 import { scrapeCompanyWebsite } from './scrapers/website.js';
 import { findEmailAddresses } from './enrichment/email-finder.js';

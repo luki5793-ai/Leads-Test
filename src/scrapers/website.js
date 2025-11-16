@@ -1,4 +1,4 @@
-import { PlaywrightCrawler } from 'apify';
+import { PlaywrightCrawler } from 'crawlee';
 import * as cheerio from 'cheerio';
 
 /**
