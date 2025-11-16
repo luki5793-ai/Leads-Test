@@ -7,10 +7,6 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install --include=optional --no-audit --no-fund
 
-# Install Playwright dependencies
-RUN npx playwright install chrome
-RUN npx playwright install-deps chrome
-
 # Copy source code
 COPY . ./
 
