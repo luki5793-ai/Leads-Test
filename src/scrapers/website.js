@@ -1,4 +1,5 @@
 import { PlaywrightCrawler } from 'crawlee';
+import { Actor } from 'apify';
 import * as cheerio from 'cheerio';
 
 /**
@@ -18,8 +19,14 @@ export async function scrapeCompanyWebsite({ url, companyName, targetJobTitles, 
     console.log(`🌐 Scrape Website: ${url}`);
 
     try {
+        // Proxy-Konfiguration erstellen wenn verfügbar
+        let proxyConfig = null;
+        if (proxyConfiguration && proxyConfiguration.useApifyProxy) {
+            proxyConfig = await Actor.createProxyConfiguration(proxyConfiguration);
+        }
+
         const crawler = new PlaywrightCrawler({
-            proxyConfiguration,
+            proxyConfiguration: proxyConfig,
             maxRequestsPerCrawl: 5,
             maxConcurrency: 1,
             requestHandlerTimeoutSecs: 60,

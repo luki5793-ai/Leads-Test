@@ -64,16 +64,28 @@ await Actor.main(async () => {
                 try {
                     console.log(`🏢 Verarbeite: ${company.name}`);
 
-                    // Website scrapen
-                    const companyData = await scrapeCompanyWebsite({
-                        url: company.website,
-                        companyName: company.name,
-                        targetJobTitles: jobTitles,
-                        proxyConfiguration
-                    });
+                    let contacts = [];
 
-                    // Leads aus Unternehmensdaten extrahieren
-                    for (const contact of companyData.contacts || []) {
+                    // Falls Mock-Kontakte vorhanden (Demo-Modus), verwende diese
+                    if (company.mockContacts && company.mockContacts.length > 0) {
+                        console.log(`📋 Verwende Demo-Kontakte für ${company.name}`);
+                        contacts = company.mockContacts.map(c => ({
+                            ...c,
+                            source: 'Demo Data'
+                        }));
+                    } else {
+                        // Andernfalls Website scrapen
+                        const companyData = await scrapeCompanyWebsite({
+                            url: company.website,
+                            companyName: company.name,
+                            targetJobTitles: jobTitles,
+                            proxyConfiguration
+                        });
+                        contacts = companyData.contacts || [];
+                    }
+
+                    // Leads aus Kontakten extrahieren
+                    for (const contact of contacts) {
                         const lead = {
                             salutation: contact.salutation || determineSalutation(contact.firstName),
                             firstName: contact.firstName,

@@ -49,7 +49,12 @@ export async function searchCompanies({ query, location, maxResults, searchEngin
  * Google-Suche durchführen
  */
 async function searchGoogle({ query, location, companies, maxResults, proxyConfiguration }) {
-    const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query + ' ' + location + ' Deutschland')}&num=${maxResults}`;
+    // Google blockiert direkte Scraping-Anfragen sehr aggressiv
+    // Für produktiven Einsatz sollte Google Custom Search API verwendet werden
+    console.log('⚠️ Hinweis: Direkte Google-Suche wird oft blockiert. Verwende Demo-Daten oder implementiere Google Custom Search API.');
+
+    // Alternative: DuckDuckGo oder andere Suchmaschinen
+    const searchUrl = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query + ' ' + location + ' Deutschland')}`;
 
     try {
         // Proxy-Konfiguration erstellen wenn verfügbar
@@ -75,18 +80,18 @@ async function searchGoogle({ query, location, companies, maxResults, proxyConfi
 
         const $ = cheerio.load(response.data);
 
-        // Google Suchergebnisse parsen
-        $('.g, .tF2Cxc').each((i, elem) => {
+        // DuckDuckGo Suchergebnisse parsen
+        $('.result, .results_links').each((i, elem) => {
             if (companies.length >= maxResults) return false;
 
-            const link = $(elem).find('a').first().attr('href');
-            const title = $(elem).find('h3').first().text();
+            const link = $(elem).find('a.result__a, a').first().attr('href');
+            const title = $(elem).find('.result__title, .result__a').first().text();
 
-            if (link && title && link.startsWith('http') && !link.includes('google.com')) {
+            if (link && title && link.startsWith('http')) {
                 companies.push({
                     name: cleanCompanyName(title),
                     website: cleanUrl(link),
-                    source: 'Google Search'
+                    source: 'DuckDuckGo Search'
                 });
             }
         });
@@ -147,19 +152,56 @@ async function searchBing({ query, location, companies, maxResults, proxyConfigu
 
 /**
  * Demo-Unternehmen für Tests
+ * HINWEIS: Für produktiven Einsatz Google Custom Search API oder andere Services verwenden
  */
 function getDemoCompanies(location, maxResults) {
+    // Verwende echte Beispiel-Unternehmen die öffentlich verfügbare Daten haben
     const demoCompanies = [
-        { name: 'Tech Solutions GmbH', website: 'https://example-tech-solutions.de', location },
-        { name: 'Digital Experts AG', website: 'https://example-digital-experts.de', location },
-        { name: 'IT Consulting Pro', website: 'https://example-it-consulting.de', location },
-        { name: 'Software Development Inc', website: 'https://example-software-dev.de', location },
-        { name: 'Cloud Services GmbH', website: 'https://example-cloud-services.de', location },
+        {
+            name: 'SAP SE',
+            website: 'https://www.sap.com',
+            location,
+            // Mock-Kontaktdaten für Demo
+            mockContacts: [{
+                firstName: 'Christian',
+                lastName: 'Klein',
+                jobTitle: 'CEO',
+                email: 'christian.klein@sap.com',
+                phone: '+49 6227 7-47474'
+            }]
+        },
+        {
+            name: 'Siemens AG',
+            website: 'https://www.siemens.com',
+            location,
+            mockContacts: [{
+                firstName: 'Roland',
+                lastName: 'Busch',
+                jobTitle: 'CEO',
+                email: 'roland.busch@siemens.com',
+                phone: '+49 89 636-00'
+            }]
+        },
+        {
+            name: 'Deutsche Telekom AG',
+            website: 'https://www.telekom.com',
+            location,
+            mockContacts: [{
+                firstName: 'Timotheus',
+                lastName: 'Höttges',
+                jobTitle: 'CEO',
+                email: 'timotheus.hoettges@telekom.de',
+                phone: '+49 228 181-0'
+            }]
+        },
     ];
 
     return demoCompanies.slice(0, Math.min(maxResults, demoCompanies.length)).map(c => ({
-        ...c,
-        source: 'Demo Data'
+        name: c.name,
+        website: c.website,
+        location: c.location,
+        source: 'Demo Data',
+        mockContacts: c.mockContacts
     }));
 }
 
